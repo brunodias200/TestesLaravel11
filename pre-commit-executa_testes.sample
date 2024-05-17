@@ -1,0 +1,17 @@
+#!/bin/sh
+# acessar .git/hooks
+# criar arquivo pre-commit
+# incluir este script para que sejam executados os testes antes de commitar
+
+
+# Execute ESLint para verificar problemas de formatação de código
+php artisan test
+
+# Se o ESLint encontrar problemas, o commit será abortado
+if [ $? -ne 0 ]; then
+  echo "Commit aborted due to lint errors."
+  exit 1
+fi
+
+# Se o ESLint não encontrar problemas, o commit continua
+exit 0
